@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E23DB4E922566CDE0020691D /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23DB4E822566CDE0020691D /* CardsView.swift */; };
 		E24CE9FD2252A119006DC89F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CE9FC2252A119006DC89F /* AppDelegate.swift */; };
 		E24CE9FF2252A119006DC89F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CE9FE2252A119006DC89F /* ViewController.swift */; };
 		E24CEA022252A119006DC89F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24CEA002252A119006DC89F /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E23DB4E822566CDE0020691D /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		E24CE9F92252A119006DC89F /* Set-2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Set-2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24CE9FC2252A119006DC89F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E24CE9FE2252A119006DC89F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				E24CEA1022530845006DC89F /* Grid.swift */,
+				E23DB4E822566CDE0020691D /* CardsView.swift */,
 				E24CEA0E2252A165006DC89F /* Set.swift */,
 				E24CE9FE2252A119006DC89F /* ViewController.swift */,
 				E24CEA002252A119006DC89F /* Main.storyboard */,
@@ -102,6 +105,7 @@
 				TargetAttributes = {
 					E24CE9F82252A119006DC89F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -142,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E24CE9FF2252A119006DC89F /* ViewController.swift in Sources */,
+				E23DB4E922566CDE0020691D /* CardsView.swift in Sources */,
 				E24CE9FD2252A119006DC89F /* AppDelegate.swift in Sources */,
 				E24CEA0F2252A166006DC89F /* Set.swift in Sources */,
 				E24CEA1122530845006DC89F /* Grid.swift in Sources */,
@@ -299,7 +304,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "dingyiyi.Set-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -317,7 +322,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "dingyiyi.Set-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

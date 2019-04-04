@@ -123,7 +123,7 @@ struct Set {
         assert(index < currentCards.count && currentCards[index] != nil )
         assert(selectedCards.count < 3)
         
-        if let selectedindex = selectedCards.index(of: index) {
+        if let selectedindex = selectedCards.firstIndex(of: index) {
             // deselect
             selectedCards.remove(at: selectedindex)
         }
