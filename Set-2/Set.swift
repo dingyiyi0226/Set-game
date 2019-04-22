@@ -37,6 +37,7 @@ struct Features{
         
         static var all = [Shape.triangle, .square, .circle]
     }
+    /// background Color
     enum Shading{
         case green
         case blue
