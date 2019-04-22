@@ -170,19 +170,18 @@ struct Set {
         }
         return true
     }
-    /// append card to the last and return the index
-    mutating func appendCard() -> Int? {
-        if carddeck.cards.isEmpty   {return nil}
-        if currentCards.count == 24 {return nil}
+    /// append card to the last
+    mutating func appendCard() -> Bool {
+        if carddeck.cards.isEmpty   {return false}
         currentCards.append(carddeck.draw())
-        return currentCards.count-1
+        return true
     }
-    /// replace card at index
-    mutating func appendCard(replace index: Int)-> Int?{
-        if carddeck.cards.isEmpty {return nil}
-        currentCards[index] = carddeck.draw()
-        return index
-    }
+//    /// replace card at index
+//    mutating func appendCard(replace index: Int)-> Int?{
+//        if carddeck.cards.isEmpty {return nil}
+//        currentCards[index] = carddeck.draw()
+//        return index
+//    }
 }
 
 extension Int{

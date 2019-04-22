@@ -11,12 +11,11 @@ import UIKit
 @IBDesignable
 class CardsView: UIView {
     
+    // game data
     var currentCards = [Card?]()
     var selectedCards = [Int]()
     
     lazy var grid = Grid(layout: .dimensions(rowCount: 4, columnCount: 3),frame: bounds)
-    
-
     
     override func draw(_ rect: CGRect) {
         
@@ -36,12 +35,10 @@ class CardsView: UIView {
         font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let color = textcolor
-        
-        return NSAttributedString(string: string, attributes: [.paragraphStyle: paragraphStyle, .font: font, .foregroundColor: color])
+        return NSAttributedString(string: string, attributes: [.paragraphStyle: paragraphStyle, .font: font, .foregroundColor: textcolor])
     }
 
-    func calcfeatures(for card: Card) -> (title: String, titleColor: UIColor, backgroundColor: UIColor){
+    private func calcfeatures(for card: Card) -> (title: String, titleColor: UIColor, backgroundColor: UIColor){
         var titlecnt = 0
         var tmptitle = ""
         var title: String = ""
@@ -86,7 +83,25 @@ class CardsView: UIView {
         }
         return (title, titleColor, backgroundColor)
     }
-
+    private func calcRowColumn(totalcards: Int) -> (Int, Int){
+        let row = totalcards%3==0 ? totalcards/3 : totalcards/3 + 1
+        let column = 3
+        return (row, column)
+    }
+    
+    func updateview(){
+        grid.dimensions = calcRowColumn(totalcards: currentCards.count)
+        
+        for cardindex in currentCards.indices{
+            let features = calcfeatures(for: currentCards[cardindex]!)
+            let str = centeredAttributedString(features.title, fontsize: 30, textcolor: features.titleColor)
+            let card = UIBezierPath(roundedRect: grid[cardindex]!.zoom(by: cardZoomRatio), cornerRadius: (grid[cardindex]?.cornerRad)! )
+            features.backgroundColor.setFill()
+            card.fill()
+            str.draw(in: grid[cardindex]!.offsetBy(dx: 0, dy: grid[cardindex]!.size.height/2 - 15))
+        }
+        setNeedsDisplay()
+    }
 }
 extension CardsView{
     private var cardZoomRatio: CGFloat {return 0.9 }

@@ -98,6 +98,7 @@ struct Grid
     private var calculatedDimensions: (rowCount: Int, columnCount: Int) = (0, 0)
     
     private mutating func recalculate() {
+        print("recalculate")
         switch layout {
         case .fixedCellSize(let cellSize):
             if cellSize.width > 0 && cellSize.height > 0 {
