@@ -24,6 +24,7 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="g3h-0X-nQm" appends="YES" id="CuO-rw-9Sa"/>
+                                    <outletCollection property="gestureRecognizers" destination="GC1-3r-MoD" appends="YES" id="kTf-tQ-VAV"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -46,6 +47,11 @@
                         <action selector="dealCards:" destination="BYZ-38-t0r" id="4Fg-Rt-q4W"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <tapGestureRecognizer id="GC1-3r-MoD">
+                    <connections>
+                        <action selector="selectCard:" destination="BYZ-38-t0r" id="ADU-N5-VBR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="105.97826086956522"/>
         </scene>

@@ -15,6 +15,9 @@ class CardsView: UIView {
     var currentCards = [Card?]()
     var selectedCards = [Int]()
     
+    // drawing data
+    var boundaryColor = UIColor.black
+    
     lazy var grid = Grid(layout: .dimensions(rowCount: 4, columnCount: 3),frame: bounds)
     
     override func draw(_ rect: CGRect) {
@@ -25,6 +28,12 @@ class CardsView: UIView {
             let card = UIBezierPath(roundedRect: grid[cardindex]!.zoom(by: cardZoomRatio), cornerRadius: (grid[cardindex]?.cornerRad)! )
             features.backgroundColor.setFill()
             card.fill()
+            if selectedCards.contains(cardindex) {
+                UIColor.black.setStroke()
+                card.lineWidth = 5.0
+                card.stroke()
+            }
+            
             str.draw(in: grid[cardindex]!.offsetBy(dx: 0, dy: grid[cardindex]!.size.height/2 - 15))
         }
 
@@ -89,16 +98,9 @@ class CardsView: UIView {
         return (row, column)
     }
     
-    func updateview(){
-        grid.dimensions = calcRowColumn(totalcards: currentCards.count)
-        
-        for cardindex in currentCards.indices{
-            let features = calcfeatures(for: currentCards[cardindex]!)
-            let str = centeredAttributedString(features.title, fontsize: 30, textcolor: features.titleColor)
-            let card = UIBezierPath(roundedRect: grid[cardindex]!.zoom(by: cardZoomRatio), cornerRadius: (grid[cardindex]?.cornerRad)! )
-            features.backgroundColor.setFill()
-            card.fill()
-            str.draw(in: grid[cardindex]!.offsetBy(dx: 0, dy: grid[cardindex]!.size.height/2 - 15))
+    func updateview(with recalculating: Bool){
+        if recalculating {
+            grid.dimensions = calcRowColumn(totalcards: currentCards.count)
         }
         setNeedsDisplay()
     }
