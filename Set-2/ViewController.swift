@@ -37,6 +37,14 @@ class ViewController: UIViewController {
         }
         
     }
+    @IBAction func shuffleCards(_ sender: UIRotationGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            shufflecards();
+        default: break;
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +91,21 @@ class ViewController: UIViewController {
         cardsView.selectedCards = game.selectedCards;
         cardsView.updateview(with: false)
     }
+    func shufflecards(){
+        if !cardsView.hadmatched.cards.isEmpty{
+            if cardsView.hadmatched.matched{
+                game.removeCards(for: cardsView.hadmatched.cards)
+                if game.currentCards.count < 12 {
+                    for _ in 1...3 { let _ = game.appendCard() }
+                }
+            }
+            cardsView.hadmatched.cards.removeAll()
+        }
+        
+        game.shuffleCards()
+        updateCardsView()
+    }
+    
     func updateCardsView(){
         cardsView.currentCards = game.currentCards
         cardsView.selectedCards = game.selectedCards;

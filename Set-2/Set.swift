@@ -147,7 +147,10 @@ struct Set {
             currentCards.remove(at: index)
         }
     }
-    
+    mutating func shuffleCards(){
+        currentCards.shuffle()
+        selectedCards.removeAll()
+    }
 
     /// return true if the set is match
     private func checkMatch(for cardindexarray: [Int]) -> Bool{

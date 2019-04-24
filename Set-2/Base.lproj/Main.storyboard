@@ -19,20 +19,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="DQd-V5-S0m" customClass="CardsView" customModule="Set_2" customModuleProvider="target">
-                                <rect key="frame" x="23" y="30" width="368" height="556"/>
+                                <rect key="frame" x="20" y="30" width="374" height="556"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="g3h-0X-nQm" appends="YES" id="CuO-rw-9Sa"/>
                                     <outletCollection property="gestureRecognizers" destination="GC1-3r-MoD" appends="YES" id="kTf-tQ-VAV"/>
+                                    <outletCollection property="gestureRecognizers" destination="dFc-rD-Ahs" appends="YES" id="xHF-1H-GhR"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DQd-V5-S0m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4uW-dC-wrF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DQd-V5-S0m" secondAttribute="trailing" constant="20" id="G2y-SR-K2Q"/>
                             <constraint firstItem="DQd-V5-S0m" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="OwI-gb-lRC"/>
-                            <constraint firstItem="DQd-V5-S0m" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="180:360" id="csg-A9-AAH"/>
+                            <constraint firstItem="DQd-V5-S0m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="WOb-wL-fyj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DQd-V5-S0m" secondAttribute="bottom" constant="150" id="kLG-6t-Je7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -52,6 +54,11 @@
                         <action selector="selectCard:" destination="BYZ-38-t0r" id="ADU-N5-VBR"/>
                     </connections>
                 </tapGestureRecognizer>
+                <rotationGestureRecognizer rotation="1" id="dFc-rD-Ahs">
+                    <connections>
+                        <action selector="shuffleCards:" destination="BYZ-38-t0r" id="0sj-4D-U9h"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="105.97826086956522"/>
         </scene>
