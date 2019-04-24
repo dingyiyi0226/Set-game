@@ -105,6 +105,12 @@ class CardsView: UIView {
         }
         setNeedsDisplay()
     }
+    func initiate(){
+        currentCards = [Card]()
+        selectedCards = [Int]()
+        hadmatched = (cards: [Int](),matched: false)
+        matchedBoundaryColor = UIColor.black
+    }
 }
 extension CardsView{
     private var cardZoomRatio: CGFloat {return 0.9 }

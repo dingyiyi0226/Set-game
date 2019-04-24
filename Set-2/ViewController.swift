@@ -43,7 +43,11 @@ class ViewController: UIViewController {
             shufflecards();
         default: break;
         }
-        
+    }
+    @IBAction func Restart(_ sender: UIButton) {
+        game = Set()
+        cardsView.initiate()
+        updateCardsView()
     }
     
     override func viewDidLoad() {
