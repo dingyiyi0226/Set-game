@@ -50,28 +50,44 @@ class ViewController: UIViewController {
         updateCardsView()
     }
     func selectcard(at point: CGPoint){
-        let coor = cardsView.grid.rowAndColumn(at: point)
-        let index = coor.row*3 + coor.column
-        
-        if let selected = game.selectedCards.firstIndex(of: index){
-            //deselect card
-            game.selectedCards.remove(at: selected)
+        // when three cards had been selected, click once to remove cards
+        if !cardsView.hadmatched.cards.isEmpty{
+            if cardsView.hadmatched.matched{
+                game.removeCards(for: cardsView.hadmatched.cards)
+                if game.currentCards.count < 12 {
+                    for _ in 1...3 { let _ = game.appendCard() }
+                }
+            }
+            cardsView.hadmatched.cards.removeAll()
             
+            cardsView.currentCards = game.currentCards
+            cardsView.updateview(with: true)
+            return
         }
-        else {
-            //select card
-            game.selectedCards.append(index)
+
+        let coor = cardsView.grid.rowAndColumn(at: point)
+        let index = coor.row*cardsView.columnNum + coor.column
+        let selected = game.selectCard(at: index)
+        if selected.threecards != nil {
+            if selected.matched {
+                cardsView.hadmatched.cards = selected.threecards!
+                cardsView.hadmatched.matched = true
+                cardsView.matchedBoundaryColor = UIColor.white
+            }
+            else{
+                cardsView.hadmatched.cards = selected.threecards!
+                cardsView.hadmatched.matched = false
+                cardsView.matchedBoundaryColor = UIColor.black
+            }
         }
         cardsView.selectedCards = game.selectedCards;
         cardsView.updateview(with: false)
-        
     }
     func updateCardsView(){
         cardsView.currentCards = game.currentCards
         cardsView.selectedCards = game.selectedCards;
         cardsView.updateview(with: true)
     }
-
 }
 
 extension Grid{

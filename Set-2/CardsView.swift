@@ -12,18 +12,17 @@ import UIKit
 class CardsView: UIView {
     
     // game data
-    var currentCards = [Card?]()
+    var currentCards = [Card]()
     var selectedCards = [Int]()
+    var hadmatched = (cards: [Int](),matched: false)
+    var matchedBoundaryColor = UIColor.black
     
-    // drawing data
-    var boundaryColor = UIColor.black
-    
-    lazy var grid = Grid(layout: .dimensions(rowCount: 4, columnCount: 3),frame: bounds)
+    lazy var grid = Grid(layout: .dimensions(rowCount: 4, columnCount: columnNum),frame: bounds)
     
     override func draw(_ rect: CGRect) {
         
         for cardindex in currentCards.indices{
-            let features = calcfeatures(for: currentCards[cardindex]!)
+            let features = calcfeatures(for: currentCards[cardindex])
             let str = centeredAttributedString(features.title, fontsize: 30, textcolor: features.titleColor)
             let card = UIBezierPath(roundedRect: grid[cardindex]!.zoom(by: cardZoomRatio), cornerRadius: (grid[cardindex]?.cornerRad)! )
             features.backgroundColor.setFill()
@@ -33,10 +32,13 @@ class CardsView: UIView {
                 card.lineWidth = 5.0
                 card.stroke()
             }
-            
+            if hadmatched.cards.contains(cardindex){
+                matchedBoundaryColor.setStroke()
+                card.lineWidth = 7.0
+                card.stroke()
+            }
             str.draw(in: grid[cardindex]!.offsetBy(dx: 0, dy: grid[cardindex]!.size.height/2 - 15))
         }
-
     }
     
     private func centeredAttributedString(_ string: String, fontsize: CGFloat, textcolor: UIColor) -> NSAttributedString{
@@ -46,7 +48,6 @@ class CardsView: UIView {
         paragraphStyle.alignment = .center
         return NSAttributedString(string: string, attributes: [.paragraphStyle: paragraphStyle, .font: font, .foregroundColor: textcolor])
     }
-
     private func calcfeatures(for card: Card) -> (title: String, titleColor: UIColor, backgroundColor: UIColor){
         var titlecnt = 0
         var tmptitle = ""
@@ -93,8 +94,8 @@ class CardsView: UIView {
         return (title, titleColor, backgroundColor)
     }
     private func calcRowColumn(totalcards: Int) -> (Int, Int){
-        let row = totalcards%3==0 ? totalcards/3 : totalcards/3 + 1
-        let column = 3
+        let row = totalcards%columnNum==0 ? totalcards/columnNum : totalcards/columnNum + 1
+        let column = columnNum
         return (row, column)
     }
     
@@ -107,14 +108,14 @@ class CardsView: UIView {
 }
 extension CardsView{
     private var cardZoomRatio: CGFloat {return 0.9 }
+    var columnNum: Int  {return 3}
 }
 
 extension CGRect{
     var cornerRad: CGFloat{
         return self.size.width * 0.1
     }
-    
-    
+
     func zoom(by scale: CGFloat) -> CGRect{
         let newwidth = width * scale
         let newheight = height * scale

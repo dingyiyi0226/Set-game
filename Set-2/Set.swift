@@ -65,7 +65,6 @@ struct Features{
         static var all = [Color.red, .orange, .yellow]
     }
 }
-
 struct Card: Equatable {
     var number:  Features.Number
     var shape:   Features.Shape
@@ -99,9 +98,8 @@ struct CardDeck {
 }
 
 struct Set {
-    
     private var carddeck = CardDeck()
-    var currentCards = [Card?]()
+    var currentCards = [Card]()
     var selectedCards = [Int]()
     
     init(){
@@ -120,8 +118,8 @@ struct Set {
      - Returns: (threecards: [Int]?, matchedOrFirst: Bool)
      */
     
-    mutating func selectCard(at index: Int) -> (threecards: [Int]?, matchedOrFirst: Bool) {
-        assert(index < currentCards.count && currentCards[index] != nil )
+    mutating func selectCard(at index: Int) -> (threecards: [Int]?, matched: Bool) {
+        assert(index < currentCards.count)
         assert(selectedCards.count < 3)
         
         if let selectedindex = selectedCards.firstIndex(of: index) {
@@ -129,39 +127,37 @@ struct Set {
             selectedCards.remove(at: selectedindex)
         }
         else{
-            if selectedCards.count < 2{
+            if selectedCards.count < 2 {
                 selectedCards.append(index)
-                if(selectedCards.count == 1){
-                    return (nil, true)
-                }
             }
             else {
                 //check
                 selectedCards.append(index)
                 let original = selectedCards
-                selectedCards = []
+                selectedCards.removeAll()
                 
-                if(checkMatch(for: original)){
-                    for index in original { currentCards[index] = nil }
-                    return (original, true)
-                }
-                else{
-                    return (original, false)
-                }
+                return (original, checkMatch(for: original))
             }
         }
         return (nil, false)
     }
+    mutating func removeCards(for cardarray: [Int]){
+        let sortedcardarray = cardarray.sorted().reversed()
+        for index in sortedcardarray{
+            currentCards.remove(at: index)
+        }
+    }
+    
 
     /// return true if the set is match
     private func checkMatch(for cardindexarray: [Int]) -> Bool{
         var sum = [0, 0, 0, 0]
         
         for index in cardindexarray{
-            sum[0] += (currentCards[index]!.number.value())
-            sum[1] += (currentCards[index]!.shape.value())
-            sum[2] += (currentCards[index]!.shading.value())
-            sum[3] += (currentCards[index]!.color.value())
+            sum[0] += (currentCards[index].number.value())
+            sum[1] += (currentCards[index].shape.value())
+            sum[2] += (currentCards[index].shading.value())
+            sum[3] += (currentCards[index].color.value())
         }
         for i in 0...3{
             if (sum[i] != 3)&&(sum[i] != 30)&&(sum[i] != 300)&&(sum[i] != 111) {
@@ -173,15 +169,9 @@ struct Set {
     /// append card to the last
     mutating func appendCard() -> Bool {
         if carddeck.cards.isEmpty   {return false}
-        currentCards.append(carddeck.draw())
+        currentCards.append(carddeck.draw()!)
         return true
     }
-//    /// replace card at index
-//    mutating func appendCard(replace index: Int)-> Int?{
-//        if carddeck.cards.isEmpty {return nil}
-//        currentCards[index] = carddeck.draw()
-//        return index
-//    }
 }
 
 extension Int{
