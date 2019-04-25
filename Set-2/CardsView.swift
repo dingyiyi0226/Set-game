@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class CardsView: UIView {
     
     // game data
@@ -16,11 +15,15 @@ class CardsView: UIView {
     var selectedCards = [Int]()
     var hadmatched = (cards: [Int](),matched: false)
     var matchedBoundaryColor = UIColor.black
-    
-    lazy var grid = Grid(layout: .dimensions(rowCount: 4, columnCount: columnNum),frame: bounds)
+    var traitchange = false
+    lazy var grid = Grid(layout: .dimensions(rowCount: 12/columnNum, columnCount: columnNum),frame: bounds)
     
     override func draw(_ rect: CGRect) {
-        
+        if traitchange{
+            let tmp = calcRowColumn(totalcards: currentCards.count)
+            grid = Grid(layout: .dimensions(rowCount: tmp.0,columnCount: tmp.1),frame: bounds)
+            traitchange = false
+        }
         for cardindex in currentCards.indices{
             let features = calcfeatures(for: currentCards[cardindex])
             let str = centeredAttributedString(features.title, fontsize: 30, textcolor: features.titleColor)
@@ -39,6 +42,9 @@ class CardsView: UIView {
             }
             str.draw(in: grid[cardindex]!.offsetBy(dx: 0, dy: grid[cardindex]!.size.height/2 - 15))
         }
+    }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        traitchange = true
     }
     
     private func centeredAttributedString(_ string: String, fontsize: CGFloat, textcolor: UIColor) -> NSAttributedString{
@@ -114,7 +120,7 @@ class CardsView: UIView {
 }
 extension CardsView{
     private var cardZoomRatio: CGFloat {return 0.9 }
-    var columnNum: Int  {return 3}
+    var columnNum: Int  {return Int(bounds.width/100)}
 }
 
 extension CGRect{

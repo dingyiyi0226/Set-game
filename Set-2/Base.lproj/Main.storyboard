@@ -29,7 +29,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UT4-iv-LoM">
-                                <rect key="frame" x="300" y="666" width="94" height="55"/>
+                                <rect key="frame" x="325" y="666" width="69" height="55"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="RESTART">
                                     <color key="titleColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -41,9 +41,9 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="UT4-iv-LoM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="300" id="2D0-Y2-JKo"/>
+                            <constraint firstItem="UT4-iv-LoM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="280" id="2D0-Y2-JKo"/>
                             <constraint firstItem="DQd-V5-S0m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4uW-dC-wrF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UT4-iv-LoM" secondAttribute="trailing" constant="20" id="AbY-FK-40Q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UT4-iv-LoM" secondAttribute="trailing" constant="30" id="AbY-FK-40Q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UT4-iv-LoM" secondAttribute="bottom" constant="15" id="B4J-ut-Sia"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DQd-V5-S0m" secondAttribute="trailing" constant="20" id="G2y-SR-K2Q"/>
                             <constraint firstItem="UT4-iv-LoM" firstAttribute="top" relation="lessThanOrEqual" secondItem="DQd-V5-S0m" secondAttribute="bottom" constant="80" id="Nis-7D-zom"/>
@@ -74,7 +74,7 @@
                     </connections>
                 </rotationGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="105.97826086956522"/>
+            <point key="canvasLocation" x="136.95652173913044" y="105.79710144927537"/>
         </scene>
     </scenes>
 </document>

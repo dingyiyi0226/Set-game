@@ -119,7 +119,7 @@ struct Set {
      */
     
     mutating func selectCard(at index: Int) -> (threecards: [Int]?, matched: Bool) {
-        assert(index < currentCards.count)
+        if index >= currentCards.count { return (nil, false) }
         assert(selectedCards.count < 3)
         
         if let selectedindex = selectedCards.firstIndex(of: index) {
